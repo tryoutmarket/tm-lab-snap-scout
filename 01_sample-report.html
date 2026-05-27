@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>snap-scout report — 觀音堂, Sheung Wan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Noto+Serif+KR:wght@300;400;500;600&family=Pretendard:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf7f1;
+  --paper: #ffffff;
+  --ink: #1a1816;
+  --ink-soft: #6b645c;
+  --ink-faint: #a8a098;
+  --rule: #e8e2d6;
+  --rule-strong: #c9c0b0;
+  --accent: #6e2a2a;
+  --accent-soft: #f0dcd6;
+  --warn: #b8801e;
+  --good: #3d6f4a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Pretendard', -apple-system, sans-serif;
+  font-weight: 300;
+  line-height: 1.65;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.005em;
+}
+
+.mono { font-family: 'JetBrains Mono', monospace; }
+.serif { font-family: 'Noto Serif KR', serif; }
+.italic-en { font-family: 'Cormorant Garamond', serif; font-style: italic; }
+
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 40px;
+  background: var(--paper);
+  box-shadow: 0 1px 0 var(--rule);
+}
+
+/* MASTHEAD */
+.masthead {
+  border-bottom: 2px solid var(--ink);
+  padding: 28px 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.masthead-l {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 22px;
+}
+.masthead-l .dot { color: var(--accent); margin: 0 8px; }
+.masthead-r {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+
+/* CONFIDENCE BADGE */
+.confidence-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.confidence-bar .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--good);
+}
+.confidence-bar .score {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: auto;
+}
+
+/* HEADER */
+.report-head {
+  padding: 56px 0 48px;
+  border-bottom: 1px solid var(--rule);
+}
+.report-head .label {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--accent);
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+.report-head h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 300;
+  font-size: 56px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.report-head h1 .en {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 400;
+  display: block;
+  font-size: 38px;
+  margin-top: 4px;
+  letter-spacing: 0;
+}
+.report-head .meta {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  font-size: 13px;
+}
+.report-head .meta .label-sm {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 4px;
+}
+.report-head .meta .value-sm {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+}
+
+/* SECTION */
+section {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--rule);
+}
+section:last-of-type { border-bottom: none; }
+.sec-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.sec-tag .num {
+  font-style: normal;
+  font-weight: 500;
+  margin-right: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.sec-h {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: 30px;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+.sec-sub {
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin-bottom: 32px;
+  max-width: 620px;
+}
+
+/* IDENTIFICATION */
+.identification {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  align-items: start;
+}
+.ref-image {
+  aspect-ratio: 3/4;
+  background: linear-gradient(135deg, #4a5a55 0%, #2c3a36 50%, #6a5a3c 100%);
+  position: relative;
+  overflow: hidden;
+}
+.ref-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(220,180,80,0.35) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 80%, rgba(80,90,75,0.4) 0%, transparent 60%);
+}
+.ref-image .stamp {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.8);
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+.id-info dl {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 14px 16px;
+  font-size: 14px;
+}
+.id-info dt {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-top: 3px;
+}
+.id-info dd { color: var(--ink); }
+.id-info dd .serif { font-size: 17px; display: block; margin-bottom: 2px; }
+.id-info dd .sub { font-size: 13px; color: var(--ink-soft); }
+.id-info dd a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-soft); }
+.id-info .coord {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+}
+
+/* CLUES */
+.clues {
+  margin-top: 36px;
+  border-top: 1px solid var(--rule);
+  padding-top: 28px;
+}
+.clues-h {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.clue-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 28px;
+}
+.clue {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 8px;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+.clue .n {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--accent);
+  font-size: 15px;
+}
+.clue strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+.clue span { color: var(--ink-soft); }
+
+/* SHOOTING CONDITIONS */
+.conditions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 40px;
+}
+.cond {
+  border-top: 1px solid var(--ink);
+  padding-top: 18px;
+}
+.cond .cond-h {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.cond .cond-h .name {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+.cond .cond-h .status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+}
+.status.good { background: #e2eee5; color: var(--good); }
+.status.warn { background: #f5e8d0; color: var(--warn); }
+.status.bad { background: #f0d9d4; color: var(--accent); }
+.cond .cond-b {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.cond .cond-b strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* LIGHT DIAGRAM */
+.light-diagram {
+  margin-top: 24px;
+  background: var(--bg);
+  padding: 24px;
+  border: 1px solid var(--rule);
+}
+.light-diagram h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.timeline {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 4px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  align-items: center;
+}
+.timeline .time { color: var(--ink-faint); letter-spacing: 0; }
+.timeline .bar {
+  height: 14px;
+  background: var(--rule);
+  position: relative;
+  border-radius: 1px;
+}
+.timeline .bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, transparent, var(--warn) 50%, var(--warn));
+  border-radius: 1px;
+}
+.timeline .bar.golden .bar-fill {
+  background: linear-gradient(to right, transparent, #c87a3a, #b94a2e);
+}
+.timeline .bar.harsh .bar-fill { background: #6b645c; }
+.timeline .bar.soft .bar-fill {
+  background: linear-gradient(to right, #d4a878, #c87a3a);
+}
+.timeline .label {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 13px;
+  color: var(--ink-soft);
+  letter-spacing: 0;
+  padding-left: 4px;
+}
+
+/* CROWD CHART */
+.crowd-chart {
+  margin-top: 24px;
+  background: var(--bg);
+  padding: 24px;
+  border: 1px solid var(--rule);
+}
+.crowd-chart h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.crowd-bars {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-align: center;
+}
+.crowd-day .day-label {
+  margin-bottom: 6px;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+.crowd-day .day-bar {
+  width: 100%;
+  background: var(--rule);
+  position: relative;
+  height: 60px;
+  display: flex;
+  align-items: flex-end;
+}
+.crowd-day .day-fill {
+  width: 100%;
+  background: var(--accent);
+  opacity: 0.7;
+}
+.crowd-day .level {
+  margin-top: 4px;
+  color: var(--ink-faint);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* CURRENT STATE */
+.current-state {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.state-card {
+  background: var(--bg);
+  border-left: 2px solid var(--good);
+  padding: 20px 24px;
+}
+.state-card.warn { border-left-color: var(--warn); }
+.state-card h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.state-card p {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* ALTERNATIVES */
+.alt-list {
+  border-top: 1px solid var(--ink);
+}
+.alt {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 60px 1fr 100px;
+  gap: 16px;
+  align-items: start;
+}
+.alt .alt-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 28px;
+  color: var(--accent);
+  line-height: 1;
+}
+.alt .alt-body h4 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.alt .alt-body .en {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 13px;
+  margin-bottom: 8px;
+  display: block;
+}
+.alt .alt-body p {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.alt .alt-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  text-align: right;
+  letter-spacing: 0.04em;
+}
+.alt .alt-meta .dist {
+  display: block;
+  color: var(--accent);
+  font-size: 13px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  margin-bottom: 4px;
+  letter-spacing: 0;
+}
+
+/* OVERSEAS */
+.overseas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 40px;
+}
+.over {
+  border-top: 1px solid var(--rule);
+  padding-top: 14px;
+}
+.over-h {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.over p {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.over p strong { color: var(--ink); font-weight: 500; }
+
+/* CAUTION */
+.caution-list { list-style: none; }
+.caution-list li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.caution-list li:last-child { border-bottom: none; }
+.caution-list .mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--accent);
+  font-size: 18px;
+  line-height: 1.3;
+}
+.caution-list strong { font-weight: 500; }
+
+/* COLOPHON */
+.colophon {
+  padding: 40px 0 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid var(--rule);
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+.colophon .sig {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 720px) {
+  .page { padding: 0 24px; }
+  .report-head h1 { font-size: 38px; }
+  .report-head h1 .en { font-size: 26px; }
+  .report-head .meta { grid-template-columns: repeat(2, 1fr); }
+  .identification { grid-template-columns: 1fr; gap: 24px; }
+  .conditions { grid-template-columns: 1fr; }
+  .current-state { grid-template-columns: 1fr; }
+  .overseas-grid { grid-template-columns: 1fr; }
+  .clue-grid { grid-template-columns: 1fr; }
+  .alt { grid-template-columns: 40px 1fr; }
+  .alt .alt-meta { grid-column: 2; text-align: left; padding-top: 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="masthead-l">snap-scout <span class="dot">·</span> <span class="italic-en">report</span></div>
+    <div class="masthead-r">RPT-001 · 2026.05.26 · for 채빈</div>
+  </header>
+
+  <div class="confidence-bar">
+    <span class="dot"></span>
+    위치 확정도 <strong style="color:var(--ink);">HIGH</strong> · 글씨 단서 + 비주얼 시그니처 + 역사 맥락 모두 일치
+    <span class="score italic-en">confidence 96 / 100</span>
+  </div>
+
+  <!-- REPORT HEAD -->
+  <div class="report-head">
+    <div class="label italic-en">a location intelligence report</div>
+    <h1>太平山街 觀音堂<span class="en">Tai Ping Shan Kwun Yam Tong, Sheung Wan</span></h1>
+    <div class="meta">
+      <div>
+        <div class="label-sm">City</div>
+        <div class="value-sm">Hong Kong</div>
+      </div>
+      <div>
+        <div class="label-sm">District</div>
+        <div class="value-sm">上環 / POHO</div>
+      </div>
+      <div>
+        <div class="label-sm">Built</div>
+        <div class="value-sm">1840</div>
+      </div>
+      <div>
+        <div class="label-sm">Verdict</div>
+        <div class="value-sm" style="color:var(--good);">go-worthy</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 01 IDENTIFICATION -->
+  <section>
+    <div class="sec-tag"><span class="num">01</span>Identification</div>
+    <h2 class="sec-h">홍콩에서 가장 오래된 관음 사원, 借庫 전통의 발상지.</h2>
+    <p class="sec-sub">사진 속 계단은 觀音堂 정면을 향해 오르는 太平山街 중단부의 가파른 계단 구간. 觀音堂(34號)이 계단 위쪽 좌측 코너에 자리잡고 있고, 노란 借庫 대련(對聯)이 그 옆 점포 정면에 걸려 있음.</p>
+
+    <div class="identification">
+      <div class="ref-image">
+        <div class="stamp">REFERENCE PHOTO · ANALYZED</div>
+      </div>
+      <div class="id-info">
+        <dl>
+          <dt>Name</dt>
+          <dd><span class="serif">太平山街 觀音堂</span><span class="sub">Tai Ping Shan Kwun Yam Tong</span></dd>
+          <dt>Address</dt>
+          <dd>香港島 上環 太平山街 34號<br><span class="sub">34 Tai Ping Shan St, Sheung Wan, HK</span></dd>
+          <dt>Coordinates</dt>
+          <dd class="coord">22.2841° N, 114.1499° E</dd>
+          <dt>Pin</dt>
+          <dd><a href="https://maps.google.com/?q=22.2841,114.1499" target="_blank">maps.google.com/?q=22.2841,114.1499</a></dd>
+          <dt>MTR</dt>
+          <dd>Sheung Wan A2 출구 → 도보 10분 (가파른 오르막)</dd>
+          <dt>Significance</dt>
+          <dd>홍콩 「觀音借庫」 전통의 <strong>최초 발상지 (1840)</strong>. 본 사원이 紅磡 등 후대 사원들의 원형.</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="clues">
+      <div class="clues-h">— 좌표 추정에 사용한 단서</div>
+      <div class="clue-grid">
+        <div class="clue"><div class="n">i</div><div><strong>「觀音堂」 간판</strong> <span>— 흰 바탕 검은 글씨, 가로형. 太平山街 觀音堂 특유의 폰트와 일치.</span></div></div>
+        <div class="clue"><div class="n">ii</div><div><strong>노란 借庫 대련</strong> <span>— 「重見洛陽橋下水」「借庫開源」「大開香海庫中金」. 借庫 의식 발상지인 본 사원에서만 보이는 조합.</span></div></div>
+        <div class="clue"><div class="n">iii</div><div><strong>계단 구조</strong> <span>— 폭 좁고 가파른 돌계단 + 중앙 금속 난간. POHO 지구 특유의 ladder street.</span></div></div>
+        <div class="clue"><div class="n">iv</div><div><strong>건축 디테일</strong> <span>— 우측 적색 패턴 외벽, 노란 단층 점포는 上環 太平山街 정확한 위치 확정 근거.</span></div></div>
+        <div class="clue"><div class="n">v</div><div><strong>식생·기후</strong> <span>— 좌측 아열대 활엽수, 습한 외벽 — 홍콩 5~9월 시즌 가능성.</span></div></div>
+        <div class="clue"><div class="n">vi</div><div><strong>도시 시그니처</strong> <span>— 우측 노란 No Entry 표지판 폰트 + 우측통행 도로 마킹 = 홍콩.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 SHOOTING CONDITIONS -->
+  <section>
+    <div class="sec-tag"><span class="num">02</span>Shooting Conditions</div>
+    <h2 class="sec-h">언제 가야, 어떻게 찍을 수 있는가.</h2>
+    <p class="sec-sub">계단은 공공 보행로, 觀音堂은 도교 사원으로 무료 개방. 단 홍콩 특유의 "삼각대 = 상업촬영" 관행 주의.</p>
+
+    <div class="conditions">
+      <div class="cond">
+        <div class="cond-h"><span class="name">입장료</span><span class="status good">FREE</span></div>
+        <div class="cond-b">사원·계단 모두 무료. 별도 예약 불필요.</div>
+      </div>
+      <div class="cond">
+        <div class="cond-h"><span class="name">촬영 허가</span><span class="status warn">CAUTION</span></div>
+        <div class="cond-b">공공 도로는 별도 허가 X. <strong>삼각대 사용시</strong> 상업촬영으로 간주될 수 있어 보안요원·경찰 단속 가능. 권장: 핸드헬드 또는 모노포드.</div>
+      </div>
+      <div class="cond">
+        <div class="cond-h"><span class="name">사원 운영시간</span><span class="status warn">UNVERIFIED</span></div>
+        <div class="cond-b">일반 도교 사원 통례 <strong>07:00–18:00</strong> (추정). 사원 내부 촬영은 신도 활동 시간 피할 것. 본 리포트에서 미확정 — 현지 확인 필요.</div>
+      </div>
+      <div class="cond">
+        <div class="cond-h"><span class="name">반입 제약</span><span class="status good">OPEN</span></div>
+        <div class="cond-b">공공 계단 = 반사판·소품 OK. 단 보행 방해 시 즉시 단속. 사원 내부는 향·연기 많아 렌즈 보호 필요.</div>
+      </div>
+    </div>
+
+    <!-- LIGHT DIAGRAM -->
+    <div class="light-diagram">
+      <h4>— 시간대별 빛 (계단 방향: NNW · 위도 22.28°N · 5월 기준)</h4>
+      <div class="timeline">
+        <div class="time">06:00</div><div class="bar"><div class="bar-fill" style="width:8%;background:#a8a098;"></div></div><div class="label">일출 전, 사원 그림자</div>
+        <div class="time">07–09</div><div class="bar soft"><div class="bar-fill" style="width:75%;"></div></div><div class="label" style="color:var(--good);">✦ 부드러운 측광, 계단 전체 균일 노출 — 최적</div>
+        <div class="time">10–11</div><div class="bar"><div class="bar-fill" style="width:45%;background:#c87a3a;"></div></div><div class="label">계단 좌측 그늘, 우측 강한 햇빛</div>
+        <div class="time">12–14</div><div class="bar harsh"><div class="bar-fill" style="width:100%;"></div></div><div class="label" style="color:var(--accent);">⚠ 직사광, 강한 그림자 — 피할 것</div>
+        <div class="time">15–17</div><div class="bar"><div class="bar-fill" style="width:55%;background:#b8801e;"></div></div><div class="label">우측 건물 그림자가 계단으로 길어짐</div>
+        <div class="time">17–19</div><div class="bar golden"><div class="bar-fill" style="width:90%;"></div></div><div class="label" style="color:var(--good);">✦ 골든아워, 따뜻한 색감 — 최적</div>
+        <div class="time">19+</div><div class="bar"><div class="bar-fill" style="width:20%;background:#3c3a36;"></div></div><div class="label">간판 조명 점등, 야경 촬영 가능</div>
+      </div>
+    </div>
+
+    <!-- CROWD CHART -->
+    <div class="crowd-chart">
+      <h4>— 요일별 혼잡도</h4>
+      <div class="crowd-bars">
+        <div class="crowd-day"><div class="day-label">월</div><div class="day-bar"><div class="day-fill" style="height:25%;"></div></div><div class="level">low</div></div>
+        <div class="crowd-day"><div class="day-label">화</div><div class="day-bar"><div class="day-fill" style="height:25%;"></div></div><div class="level">low</div></div>
+        <div class="crowd-day"><div class="day-label">수</div><div class="day-bar"><div class="day-fill" style="height:30%;"></div></div><div class="level">low</div></div>
+        <div class="crowd-day"><div class="day-label">목</div><div class="day-bar"><div class="day-fill" style="height:35%;"></div></div><div class="level">low</div></div>
+        <div class="crowd-day"><div class="day-label">금</div><div class="day-bar"><div class="day-fill" style="height:50%;"></div></div><div class="level">mid</div></div>
+        <div class="crowd-day"><div class="day-label">토</div><div class="day-bar"><div class="day-fill" style="height:80%;"></div></div><div class="level">high</div></div>
+        <div class="crowd-day"><div class="day-label">일</div><div class="day-bar"><div class="day-fill" style="height:85%;"></div></div><div class="level">high</div></div>
+      </div>
+      <p style="margin-top:14px;font-size:12.5px;color:var(--ink-soft);line-height:1.6;">⚠ <strong style="color:var(--accent);">2026년 3월 13~14일 觀音借庫 기간</strong>: 사원 야간 개방 + 수만 명 신도 운집. 촬영 불가 수준. 이 주간은 무조건 피할 것.</p>
+    </div>
+  </section>
+
+  <!-- 03 CURRENT STATE -->
+  <section>
+    <div class="sec-tag"><span class="num">03</span>Current State Check</div>
+    <h2 class="sec-h">사진과 지금, 무엇이 같고 무엇이 다른가.</h2>
+    <p class="sec-sub">레퍼런스 사진의 시그니처 요소(觀音堂 간판·借庫 대련·계단·우측 적색 외벽)는 모두 현존. 1840년 사원이라 구조 변화 가능성 매우 낮음.</p>
+
+    <div class="current-state">
+      <div class="state-card">
+        <h4>觀音堂 본체</h4>
+        <p>1840년 창건 이후 안정 운영. 90년대 초 太平山街 도로 정비로 정문이 약간 후퇴했지만 사진 속 구조는 그 이후 모습 그대로.</p>
+      </div>
+      <div class="state-card">
+        <h4>노란 借庫 대련</h4>
+        <p>觀音堂 측 영구 설치물. 매년 借庫 시즌에 새로 도색되지만 위치·문구·색감 동일. 사진과 현재 일치.</p>
+      </div>
+      <div class="state-card">
+        <h4>계단·난간</h4>
+        <p>太平山街 자체가 보호 거리 지정. 계단 구조·중앙 난간 모두 보존 대상. 변화 없음.</p>
+      </div>
+      <div class="state-card warn">
+        <h4>주변 점포</h4>
+        <p>좌측 빨간 차양·노란 단층 점포는 임대 점포라 1~2년 주기로 업종 변동 가능. 색감 다를 수 있음 — 현지 확인 권장.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 ALTERNATIVES -->
+  <section>
+    <div class="sec-tag"><span class="num">04</span>Alternatives in walking distance</div>
+    <h2 class="sec-h">같은 무드, 다른 컷.</h2>
+    <p class="sec-sub">觀音堂이 붐비거나 컷이 겹친다면, POHO 지구 도보 5~10분 안에 비슷한 결의 장소 다수.</p>
+
+    <div class="alt-list">
+      <div class="alt">
+        <div class="alt-num">01</div>
+        <div class="alt-body">
+          <h4>磅巷 (Pound Lane)</h4>
+          <span class="en">238 steps · 觀音堂 옆 골목</span>
+          <p>觀音堂에서 도보 2분. 觀音堂보다 한적하고 계단이 더 김. 양옆 빌딩 그림자가 계단에 깊은 선을 만듦. 인물 단독 컷에 더 어울림.</p>
+        </div>
+        <div class="alt-meta"><span class="dist">120 m</span>SE</div>
+      </div>
+      <div class="alt">
+        <div class="alt-num">02</div>
+        <div class="alt-body">
+          <h4>樓梯街 (Ladder Street)</h4>
+          <span class="en">Ladder Street · 文武廟 옆</span>
+          <p>홍콩에서 가장 유명한 계단. 觀音堂보다 폭 넓고 더 화려. 단점은 관광객·다른 작가와 충돌 확률 높음. 평일 오전 추천.</p>
+        </div>
+        <div class="alt-meta"><span class="dist">350 m</span>E</div>
+      </div>
+      <div class="alt">
+        <div class="alt-num">03</div>
+        <div class="alt-body">
+          <h4>Tank Lane (水池巷)</h4>
+          <span class="en">컬러풀 벽화 골목</span>
+          <p>계단은 아니지만 좁은 골목 + 컬러 벽화. 觀音堂의 무드와 대비되는 캐주얼/스트릿 컷. 같은 출사에 톤 변화 주기 좋음.</p>
+        </div>
+        <div class="alt-meta"><span class="dist">200 m</span>NE</div>
+      </div>
+      <div class="alt">
+        <div class="alt-num">04</div>
+        <div class="alt-body">
+          <h4>Tai On Terrace (大安台)</h4>
+          <span class="en">磅巷 위쪽 카페 골목</span>
+          <p>磅巷을 따라 올라간 정상의 작은 테라스. 카페·갤러리 + 트램 노출. 야외 + 실내 카페 컷 둘 다 가능.</p>
+        </div>
+        <div class="alt-meta"><span class="dist">300 m</span>SE</div>
+      </div>
+      <div class="alt">
+        <div class="alt-num">05</div>
+        <div class="alt-body">
+          <h4>Po Hing Fong (普慶坊)</h4>
+          <span class="en">POHO 지구 메인 거리</span>
+          <p>觀音堂 한 블록 아래. 카페·부티크 밀집. 인물의 평지 컷 + 모던 무드. 계단 출사 후 자연스러운 동선.</p>
+        </div>
+        <div class="alt-meta"><span class="dist">150 m</span>N</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 OVERSEAS MODE -->
+  <section>
+    <div class="sec-tag"><span class="num">05</span>Overseas Mode · 한국 → 홍콩</div>
+    <h2 class="sec-h">처음 가는 도시라면 알아둘 것.</h2>
+
+    <div class="overseas-grid">
+      <div class="over">
+        <div class="over-h">Visa</div>
+        <p>한국 여권 <strong>무비자 90일</strong>. 출입국 시 호텔 주소 신고만.</p>
+      </div>
+      <div class="over">
+        <div class="over-h">Filming permit</div>
+        <p>공공 도로·사원 무허가. <strong>LCSD 관할 공원</strong>(빅토리아 파크 등)은 사전 신청. POHO 지구는 해당 X.</p>
+      </div>
+      <div class="over">
+        <div class="over-h">Best season</div>
+        <p><strong>11월–3월 청명·건조</strong>. 5–9월 우기·습도 90% — 카메라 결로 주의. 본 사진이 5월이라면 한계 시즌.</p>
+      </div>
+      <div class="over">
+        <div class="over-h">Local fixer</div>
+        <p>POHO는 MTR + 도보 접근이라 코디네이터 불필요. 광둥어 못 해도 영어로 충분. 신랑신부 동행 시 가파른 경사 주의.</p>
+      </div>
+      <div class="over">
+        <div class="over-h">Equipment</div>
+        <p>전압 220V · 영국식 BF 콘센트(어댑터 필수). 4G 로밍 또는 현지 SIM 권장 — 골목 진입 시 GPS 필요.</p>
+      </div>
+      <div class="over">
+        <div class="over-h">Wardrobe</div>
+        <p>5월 평균 26℃ · 습도 80%. 신부 드레스 결로·습기 대비. 흰 드레스가 계단 톤과 대비 좋음 (사진에서 입증됨).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 CAUTION -->
+  <section>
+    <div class="sec-tag"><span class="num">06</span>Photographer's caution</div>
+    <h2 class="sec-h">알고 가야 할 것.</h2>
+    <ul class="caution-list">
+      <li><div class="mark">i.</div><div><strong>觀音堂은 종교 시설입니다.</strong> 신도 활동 시간(특히 음력 1·15일, 借庫 시즌)에 사원 정면 촬영은 분쟁 소지. 신도들이 들어오면 즉시 비켜주기.</div></li>
+      <li><div class="mark">ii.</div><div><strong>계단은 실제 주민 통행로.</strong> POHO 지구는 거주 구역. 계단 점거 + 보행 차단은 주민 민원 즉각. 컷 사이 동선 비워주기.</div></li>
+      <li><div class="mark">iii.</div><div><strong>삼각대 = 위험 신호.</strong> 홍콩 보안요원·교통경찰은 삼각대 보면 상업촬영 의심. 핸드헬드 + 모노포드까지만.</div></li>
+      <li><div class="mark">iv.</div><div><strong>2026년 3월 13–14일 절대 피하기.</strong> 觀音借庫 본 행사. 신도 수만 명, 야간 운영. 촬영 자체 불가.</div></li>
+      <li><div class="mark">v.</div><div><strong>가파른 경사 — 신부 신발 주의.</strong> 계단 폭이 좁고 표면이 닳아 미끄러움. 굽 있는 슈즈는 환복 후 진입 추천. 본식 드레스라면 보조 어시 1명 필수.</div></li>
+      <li><div class="mark">vi.</div><div><strong>드론 금지.</strong> 上環 일대는 주거밀집 + 사원 보호. 민항처(CAD) 허가 없이 비행 불가.</div></li>
+    </ul>
+  </section>
+
+  <!-- COLOPHON -->
+  <footer class="colophon">
+    <div>generated by snap-scout · v0.1 prototype · 2026.05.26</div>
+    <div class="sig">for 채빈, with care.</div>
+  </footer>
+
+</div>
+</body>
+</html>

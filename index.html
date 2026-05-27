@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNAP-SCOUT · Reference → Location Intelligence</title>
+<meta name="description" content="스냅 사진 작가를 위한 레퍼런스 사진 → 위치 리포트. Reference photo to scouting report.">
+<meta property="og:title" content="SNAP-SCOUT">
+<meta property="og:description" content="레퍼런스 사진 한 장에서 답사 결정까지.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Pretendard:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --ink: #0a0a0a;
+  --ink-2: #2a2a2a;
+  --ink-soft: #5a5a5a;
+  --ink-faint: #8a8a8a;
+  --rule: #1a1a1a;
+  --rule-soft: #e2e2e2;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+::selection { background: var(--ink); color: var(--bg); }
+
+html, body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Pretendard', 'Inter', -apple-system, sans-serif;
+  font-weight: 400;
+  line-height: 1.55;
+  font-size: 14.5px;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.003em;
+}
+
+.mono { font-family: 'JetBrains Mono', monospace; font-feature-settings: 'tnum' 1; }
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--bg);
+}
+
+/* MASTHEAD */
+.masthead {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.masthead .wordmark {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+.masthead .wordmark .slash { color: #888; margin: 0 2px; font-weight: 300; }
+.masthead .meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: #c0c0c0;
+  text-transform: uppercase;
+}
+.masthead .meta strong { color: #fff; font-weight: 500; }
+
+/* SUBNAV */
+.subnav {
+  border-bottom: 2px solid var(--ink);
+  padding: 14px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.subnav-l { color: var(--ink); font-weight: 500; }
+.subnav-r { color: var(--ink-soft); }
+
+/* HERO */
+.hero {
+  padding: 96px 40px 80px;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 40px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule-soft);
+  display: flex;
+  justify-content: space-between;
+}
+.hero h1 {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 900;
+  font-size: clamp(48px, 8.5vw, 108px);
+  letter-spacing: -0.045em;
+  line-height: 0.96;
+  margin-bottom: 28px;
+}
+.hero h1 .em {
+  font-style: italic;
+  font-weight: 800;
+  font-family: 'Inter', serif;
+}
+.hero .h1-en {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: clamp(18px, 2.4vw, 26px);
+  letter-spacing: -0.012em;
+  color: var(--ink-soft);
+  margin-bottom: 56px;
+  max-width: 720px;
+  line-height: 1.3;
+}
+.hero-lede {
+  max-width: 640px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  border-top: 1px solid var(--ink);
+  padding-top: 24px;
+}
+.hero-lede p + p { margin-top: 14px; }
+
+/* WHAT */
+.what {
+  padding: 56px 40px;
+  border-bottom: 2px solid var(--ink);
+  background: #fafafa;
+}
+.what-head {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 32px;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--ink);
+  align-items: baseline;
+}
+.what-num {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+}
+.what-title h2 {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: -0.025em;
+  margin-bottom: 6px;
+}
+.what-title .en {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.what-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--ink);
+}
+.what-cell {
+  padding: 28px 24px 32px;
+  border-right: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--rule-soft);
+  background: var(--bg);
+}
+.what-cell:last-child { border-right: 1px solid var(--rule-soft); }
+.what-cell .wc-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  margin-bottom: 14px;
+}
+.what-cell h3 {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.018em;
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+.what-cell p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* COLLECTION */
+.collection {
+  padding: 80px 40px 56px;
+}
+.coll-head {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 32px;
+  margin-bottom: 48px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--ink);
+  align-items: baseline;
+}
+.coll-num {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 56px;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+}
+.coll-title h2 {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+.coll-title .en {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.coll-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-align: right;
+  line-height: 1.6;
+}
+.coll-count strong { color: var(--ink); font-weight: 500; }
+
+.reports {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.report-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform 0.18s ease;
+}
+.report-card:hover { transform: translateY(-3px); }
+.report-card .rc-photo {
+  width: 100%;
+  aspect-ratio: 4/5;
+  background: var(--rule-soft);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 14px;
+}
+.report-card .rc-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.report-card:hover .rc-photo img { transform: scale(1.04); }
+.report-card .rc-photo .rc-tag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 7px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.report-card .rc-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+.report-card .rc-title {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+.report-card .rc-sub {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+.report-card .rc-foot {
+  font-size: 12px;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--rule-soft);
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.report-card .rc-foot .arrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-weight: 500;
+  border-bottom: 1.5px solid var(--ink);
+  padding-bottom: 1px;
+}
+
+/* SOON CARD */
+.report-card.soon { pointer-events: none; }
+.report-card.soon .rc-photo {
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.report-card.soon .rc-photo::after {
+  content: 'COMING';
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--ink-faint);
+}
+.report-card.soon .rc-title { color: var(--ink-faint); }
+.report-card.soon .rc-sub { color: var(--ink-faint); }
+.report-card.soon .rc-foot .arrow { color: var(--ink-faint); border-bottom-color: var(--ink-faint); }
+
+/* ABOUT */
+.about {
+  padding: 80px 40px;
+  border-top: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.about-l h2 {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 800;
+  font-size: clamp(32px, 4.5vw, 52px);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin-bottom: 24px;
+}
+.about-l p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #c4c4c4;
+  max-width: 520px;
+}
+.about-l p + p { margin-top: 14px; }
+.about-r dl {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 0;
+}
+.about-r dt, .about-r dd {
+  padding: 14px 0;
+  border-bottom: 1px solid #2a2a2a;
+  font-size: 13px;
+}
+.about-r dl > dt:first-child, .about-r dl > dt:first-child + dd { border-top: 1px solid #555; padding-top: 16px; }
+.about-r dt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-top: 16px;
+}
+.about-r dd {
+  font-weight: 500;
+  color: #f0f0f0;
+}
+.about-r dd .sub { display: block; font-weight: 400; color: #999; font-size: 12px; margin-top: 2px; }
+
+/* FOOTER */
+.footer {
+  padding: 28px 40px 36px;
+  background: var(--ink);
+  color: var(--bg);
+  border-top: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+}
+.footer .f-l strong { color: #ddd; font-weight: 500; }
+
+@media (max-width: 880px) {
+  .what-grid { grid-template-columns: repeat(2, 1fr); }
+  .reports { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .hero { padding: 64px 28px 56px; }
+  .what, .collection, .about { padding-left: 28px; padding-right: 28px; }
+  .masthead, .subnav, .footer { padding-left: 20px; padding-right: 20px; }
+}
+@media (max-width: 560px) {
+  .what-grid { grid-template-columns: 1fr; }
+  .reports { grid-template-columns: 1fr; }
+  .what-head, .coll-head { grid-template-columns: 1fr; gap: 12px; }
+  .what-num, .coll-num { font-size: 36px; }
+  .footer { flex-direction: column; gap: 8px; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="wordmark">SNAP<span class="slash">/</span>SCOUT</div>
+    <div class="meta"><strong>VOL.01</strong> &nbsp;·&nbsp; <span>2026 · KR</span></div>
+  </header>
+
+  <!-- SUBNAV -->
+  <div class="subnav">
+    <div class="subnav-l">REPORT COLLECTION · WEDDING SNAP RECON</div>
+    <div class="subnav-r">A SIDE PROJECT FOR PHOTOGRAPHERS</div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">
+      <span>ISSUE — VOL.01 / FIELD GUIDE</span>
+      <span>EST. 2026</span>
+    </div>
+    <h1>레퍼런스 사진 한 장에서<br><span class="em">답사 결정</span>까지.</h1>
+    <p class="h1-en">Turn a single reference photo into a complete scouting report — location, conditions, alternatives.</p>
+    <div class="hero-lede">
+      <p>스냅 작가는 매번 핀터레스트에 모아둔 레퍼런스 사진 앞에서 같은 질문을 반복한다. <strong>"여기 어디지? 지금도 이 모습일까? 거기서 정말 찍을 수 있을까?"</strong></p>
+      <p>SNAP-SCOUT은 그 한 장의 사진에서 위치를 추정하고, 현재 상태를 점검하고, 촬영 조건을 정리하고, 비슷한 무드의 대체 공간을 추천하는 한 페이지짜리 답사 리포트를 만든다.</p>
+    </div>
+  </section>
+
+  <!-- WHAT -->
+  <section class="what">
+    <div class="what-head">
+      <div class="what-num">01</div>
+      <div class="what-title">
+        <h2>한 장이 리포트가 되는 흐름</h2>
+        <div class="en">What a single photo becomes.</div>
+      </div>
+    </div>
+    <div class="what-grid">
+      <div class="what-cell">
+        <div class="wc-num">01 / IDENTIFY</div>
+        <h3>위치 추정</h3>
+        <p>글씨 OCR, 비주얼 시그니처, EXIF, 지도 검색을 조합해 좌표까지 짚는다.</p>
+      </div>
+      <div class="what-cell">
+        <div class="wc-num">02 / CONDITIONS</div>
+        <h3>촬영 조건</h3>
+        <p>입장료·허가·골든아워·혼잡 시간대. 답사 가기 전 알아야 할 것들.</p>
+      </div>
+      <div class="what-cell">
+        <div class="wc-num">03 / CURRENT</div>
+        <h3>현재 상태</h3>
+        <p>최신 데이터로 사진과 비교. 폐업, 리모델링, 동선 변경을 잡아낸다.</p>
+      </div>
+      <div class="what-cell">
+        <div class="wc-num">04 / ALTERNATIVES</div>
+        <h3>대체 공간</h3>
+        <p>같은 무드의 3~5곳. 핀터레스트 추천 알고리즘 + 직접 매칭.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTION -->
+  <section class="collection">
+    <div class="coll-head">
+      <div class="coll-num">02</div>
+      <div class="coll-title">
+        <h2>리포트 컬렉션</h2>
+        <div class="en">Field Reports — Issue Vol.01</div>
+      </div>
+      <div class="coll-count"><strong>1</strong> PUBLISHED<br>2 IN PROGRESS</div>
+    </div>
+
+    <div class="reports">
+
+      <!-- REPORT №001 -->
+      <a class="report-card" href="02_sample-report.html">
+        <div class="rc-photo">
+          <span class="rc-tag">№001</span>
+          <img src="reference.jpg" alt="觀音堂 holding incense — reference photo" loading="lazy">
+        </div>
+        <div class="rc-meta">
+          <span>HONG KONG</span>
+          <span>2026.03</span>
+        </div>
+        <div class="rc-title">觀音堂 · 太平山街</div>
+        <div class="rc-sub">Sheung Wan, Hong Kong · 觀音借庫 tradition</div>
+        <div class="rc-foot">
+          <span>한자 OCR + 비주얼 매칭으로 추정</span>
+          <span class="arrow">READ →</span>
+        </div>
+      </a>
+
+      <!-- REPORT №002 - SOON -->
+      <a class="report-card soon">
+        <div class="rc-photo"><span class="rc-tag">№002</span></div>
+        <div class="rc-meta">
+          <span>TBD</span>
+          <span>—</span>
+        </div>
+        <div class="rc-title">Coming Soon</div>
+        <div class="rc-sub">Next reference up next.</div>
+        <div class="rc-foot">
+          <span>채빈 큐레이션에서</span>
+          <span class="arrow">SOON</span>
+        </div>
+      </a>
+
+      <!-- REPORT №003 - SOON -->
+      <a class="report-card soon">
+        <div class="rc-photo"><span class="rc-tag">№003</span></div>
+        <div class="rc-meta">
+          <span>TBD</span>
+          <span>—</span>
+        </div>
+        <div class="rc-title">Coming Soon</div>
+        <div class="rc-sub">Next reference up next.</div>
+        <div class="rc-foot">
+          <span>채빈 큐레이션에서</span>
+          <span class="arrow">SOON</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="about-grid">
+      <div class="about-l">
+        <h2>웹앱이 아니라 도구다.</h2>
+        <p>SNAP-SCOUT은 서비스가 아니라 한 명의 작가를 위해 만든 Claude Skill이다. 핀터레스트 보드 자체를 답사 가능한 자산으로 바꾸는 게 목표.</p>
+        <p>v2는 보드 전체 일괄 분석, v3는 작가 본인 작업물의 시그니처 추출, v4는 둘을 결합한 큐레이션으로 이어진다.</p>
+      </div>
+      <div class="about-r">
+        <dl>
+          <dt>For</dt>
+          <dd>웨딩 스냅 작가 채빈<span class="sub">a real photographer, a real pain.</span></dd>
+          <dt>Form</dt>
+          <dd>Claude Skill<span class="sub">~/.claude/skills/snap-scout/</span></dd>
+          <dt>Stage</dt>
+          <dd>v1 · Single Photo Recon<span class="sub">v2~v4 roadmap drafted.</span></dd>
+          <dt>Built By</dt>
+          <dd>tryout-market · tm-lab<span class="sub">a side project, not a product.</span></dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="f-l">© 2026 <strong>TRYOUT-MARKET / TM-LAB</strong> · SNAP-SCOUT</div>
+    <div class="f-r">VOL.01 · BUILT WITH CLAUDE</div>
+  </footer>
+
+</div>
+</body>
+</html>

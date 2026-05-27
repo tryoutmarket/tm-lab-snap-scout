@@ -1,0 +1,14 @@
+# 내부 문서 — 페르소나/PRD/로드맵은 비공개
+docs/
+_drafts/
+
+# macOS
+.DS_Store
+
+# 에디터
+.vscode/
+.idea/
+
+# 임시
+*.tmp
+*.log

@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNAP-SCOUT · Report №001 · 觀音堂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Pretendard:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --ink: #0a0a0a;
+  --ink-2: #2a2a2a;
+  --ink-soft: #5a5a5a;
+  --ink-faint: #8a8a8a;
+  --rule: #1a1a1a;
+  --rule-soft: #e2e2e2;
+  --accent: #0a0a0a;
+  --hl: #fffbcc;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+::selection { background: var(--ink); color: var(--bg); }
+
+html, body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Pretendard', 'Inter', -apple-system, sans-serif;
+  font-weight: 400;
+  line-height: 1.55;
+  font-size: 14.5px;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.003em;
+}
+
+.mono { font-family: 'JetBrains Mono', monospace; font-feature-settings: 'tnum' 1; }
+sup.fn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  font-weight: 500;
+  vertical-align: super;
+  line-height: 0;
+  padding: 0 1px 0 2px;
+  color: var(--ink);
+}
+sup.fn a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
+
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  background: var(--bg);
+}
+
+/* MASTHEAD */
+.masthead {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--ink);
+}
+.masthead .wordmark {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+.masthead .wordmark .slash { color: #888; margin: 0 2px; font-weight: 300; }
+.masthead .meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: #c0c0c0;
+  text-transform: uppercase;
+}
+.masthead .meta strong { color: #fff; font-weight: 500; }
+
+/* SUB-NAV */
+.subnav {
+  border-bottom: 2px solid var(--ink);
+  padding: 14px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.subnav-l { color: var(--ink); font-weight: 500; }
+.subnav-r { color: var(--ink-soft); }
+
+/* COVER */
+.cover {
+  padding: 64px 40px 40px;
+  border-bottom: 1px solid var(--rule);
+}
+.cover-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 32px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule-soft);
+  display: flex;
+  justify-content: space-between;
+}
+.cover h1 {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 900;
+  font-size: clamp(56px, 10vw, 116px);
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  margin-bottom: 16px;
+}
+.cover .h1-en {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: clamp(20px, 2.6vw, 30px);
+  letter-spacing: -0.015em;
+  color: var(--ink-soft);
+  margin-bottom: 56px;
+}
+.cover-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items: end;
+}
+.cover-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--rule-soft);
+  overflow: hidden;
+  position: relative;
+}
+.cover-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0%);
+}
+.cover-photo .ph-meta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 10px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+}
+.cover-summary dl {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 0;
+}
+.cover-summary dt, .cover-summary dd {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 13px;
+}
+.cover-summary dt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-top: 16px;
+}
+.cover-summary dd {
+  font-weight: 500;
+  color: var(--ink);
+}
+.cover-summary dd .sub { display: block; font-weight: 400; color: var(--ink-soft); font-size: 12px; margin-top: 2px; }
+.cover-summary dd a { color: var(--ink); text-decoration: none; border-bottom: 1.5px solid var(--ink); }
+
+.cover-summary dl > dt:first-child,
+.cover-summary dl > dt:first-child + dd { border-top: 1px solid var(--ink); padding-top: 14px; }
+
+/* VERDICT BAR */
+.verdict {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 18px 40px;
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  gap: 32px;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.verdict .v-block strong {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  display: block;
+  margin-top: 2px;
+}
+.verdict .v-block.score strong { color: #fff; }
+.verdict .v-block.good strong { color: #6dd96d; }
+.verdict .v-summary { font-size: 11.5px; color: #c0c0c0; text-transform: none; letter-spacing: 0.02em; }
+
+/* SECTION */
+section {
+  padding: 56px 40px;
+  border-bottom: 1px solid var(--rule);
+}
+.sec-head {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 32px;
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.sec-num {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  color: var(--ink);
+  font-feature-settings: 'tnum' 1;
+}
+.sec-title h2 {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.sec-title .en {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.sec-aside {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-align: right;
+  line-height: 1.6;
+}
+
+/* IDENTIFICATION */
+.id-clues {
+  margin-top: 32px;
+  border-top: 1px solid var(--ink);
+}
+.id-clues-h {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 0 12px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.clue-row {
+  display: grid;
+  grid-template-columns: 40px 200px 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 13.5px;
+}
+.clue-row .c-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  color: var(--ink-faint);
+}
+.clue-row .c-name {
+  font-weight: 600;
+  color: var(--ink);
+}
+.clue-row .c-desc { color: var(--ink-soft); line-height: 1.55; }
+
+/* TABLE */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.tbl thead th {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 12px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  color: var(--ink);
+}
+.tbl tbody td {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  vertical-align: top;
+}
+.tbl td.col-name { font-weight: 600; width: 180px; padding-right: 16px; }
+.tbl td.col-status { width: 110px; padding-right: 16px; }
+.tbl td.col-desc { color: var(--ink-soft); line-height: 1.6; }
+.badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  text-transform: uppercase;
+}
+.badge.b-ok { background: var(--ink); color: var(--bg); }
+.badge.b-warn { background: var(--bg); color: var(--ink); border: 1.5px solid var(--ink); }
+.badge.b-bad { background: var(--hl); color: var(--ink); border: 1.5px solid var(--ink); }
+.badge.b-unk { background: var(--rule-soft); color: var(--ink); }
+
+/* LIGHT CHART */
+.light-grid {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule-soft);
+}
+.light-grid h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.timeline {
+  display: grid;
+  grid-template-columns: 70px 1fr 200px;
+  gap: 0 12px;
+  font-size: 12px;
+  align-items: stretch;
+}
+.timeline > div {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  display: flex;
+  align-items: center;
+}
+.timeline .t-time { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-soft); }
+.timeline .t-bar { position: relative; height: 100%; }
+.timeline .t-bar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 12px;
+  background: var(--ink);
+}
+.timeline .t-bar[data-w="10"]::before { width: 10%; opacity: 0.2; }
+.timeline .t-bar[data-w="35"]::before { width: 35%; opacity: 0.5; }
+.timeline .t-bar[data-w="55"]::before { width: 55%; opacity: 0.7; }
+.timeline .t-bar[data-w="75"]::before { width: 75%; opacity: 1; }
+.timeline .t-bar[data-w="100"]::before { width: 100%; }
+.timeline .t-bar.harsh::before { background: var(--hl); border: 1.5px solid var(--ink); height: 14px; }
+.timeline .t-bar.golden::before { background: var(--ink); }
+.timeline .t-label { font-size: 12px; color: var(--ink); }
+.timeline .t-label.good { font-weight: 600; }
+.timeline .t-label.bad { font-weight: 600; background: var(--hl); padding: 2px 6px; }
+
+/* CROWD CHART */
+.crowd {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule-soft);
+}
+.crowd h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.crowd-bars {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-align: center;
+}
+.crowd-day .d-l { margin-bottom: 6px; color: var(--ink-soft); letter-spacing: 0.05em; text-transform: uppercase; }
+.crowd-day .d-b { width: 100%; height: 64px; background: var(--rule-soft); position: relative; display: flex; align-items: flex-end; }
+.crowd-day .d-f { width: 100%; background: var(--ink); }
+.crowd-day .d-v { margin-top: 6px; color: var(--ink); font-weight: 500; font-size: 11px; }
+.crowd-warn {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: var(--hl);
+  border: 1.5px solid var(--ink);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+.crowd-warn strong { font-weight: 700; }
+
+/* CURRENT STATE GRID */
+.state-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.state-card {
+  padding: 18px 16px;
+  border: 1.5px solid var(--ink);
+  background: var(--bg);
+}
+.state-card.warn { background: var(--hl); }
+.state-card .s-h {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--ink);
+}
+.state-card h4 {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.state-card p { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
+.state-card.warn p { color: var(--ink); }
+
+/* ALTERNATIVES */
+.alt-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4px;
+}
+.alt-tbl thead th {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 12px 8px;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.alt-tbl thead th.t-r { text-align: right; }
+.alt-tbl tbody td {
+  padding: 18px 8px;
+  border-bottom: 1px solid var(--rule-soft);
+  vertical-align: top;
+}
+.alt-tbl tbody td.t-r { text-align: right; }
+.alt-tbl .a-num {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 32px;
+  width: 60px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.alt-tbl .a-name {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+.alt-tbl .a-en {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+  text-transform: none;
+}
+.alt-tbl .a-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+.alt-tbl .a-dist {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--ink);
+}
+.alt-tbl .a-dir {
+  display: block;
+  margin-top: 2px;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+
+/* OVERSEAS */
+.over-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--ink);
+}
+.over-cell {
+  padding: 18px 20px 18px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  border-right: 1px solid var(--rule-soft);
+}
+.over-cell:nth-child(3n) { border-right: none; padding-right: 0; }
+.over-cell:nth-child(3n+2) { padding-left: 20px; padding-right: 20px; }
+.over-cell:nth-child(3n+3) { padding-left: 20px; }
+.over-cell .o-h {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+.over-cell p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+.over-cell p strong { color: var(--ink); font-weight: 600; }
+
+/* CAUTION */
+.caution-list { list-style: none; border-top: 1px solid var(--ink); }
+.caution-list li {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 16px;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.caution-list .c-i {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.caution-list strong { font-weight: 700; }
+
+/* GALLERY */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+}
+.gallery-cell {
+  display: block;
+  aspect-ratio: 1/1;
+  background: var(--rule-soft);
+  overflow: hidden;
+  position: relative;
+  filter: grayscale(100%) contrast(1.05);
+  transition: filter 0.3s;
+  text-decoration: none;
+}
+.gallery-cell:hover { filter: grayscale(0%) contrast(1); }
+.gallery-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.gallery-cell .g-num {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 4px rgba(0,0,0,0.6);
+}
+
+.gallery-caption {
+  margin-top: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+/* SOURCES */
+.sources {
+  background: #f5f5f5;
+  padding: 32px 40px;
+  border-top: 2px solid var(--ink);
+}
+.sources-h {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.sources-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+}
+.sources-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 32px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.sources-list li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 8px;
+  padding: 6px 0;
+}
+.sources-list .s-n {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  color: var(--ink);
+}
+.sources-list a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-soft);
+  word-break: break-word;
+}
+.sources-list a:hover { border-bottom-color: var(--ink); }
+.sources-list .s-host {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-left: 4px;
+}
+
+/* COLOPHON */
+.colophon {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 28px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.colophon strong { color: #fff; font-weight: 500; }
+.colophon .sig { color: #999; }
+
+@media (max-width: 760px) {
+  .masthead { padding: 14px 20px; }
+  .masthead .wordmark { font-size: 18px; }
+  .subnav { padding: 10px 20px; }
+  .cover { padding: 40px 20px 28px; }
+  .cover h1 { font-size: 48px; }
+  .cover-grid { grid-template-columns: 1fr; gap: 28px; }
+  .verdict { grid-template-columns: 1fr 1fr; padding: 18px 20px; gap: 20px; }
+  .verdict .v-summary { grid-column: span 2; }
+  section { padding: 40px 20px; }
+  .sec-head { grid-template-columns: 1fr; gap: 8px; }
+  .sec-num { font-size: 48px; }
+  .sec-aside { text-align: left; }
+  .state-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+  .over-grid { grid-template-columns: 1fr; }
+  .over-cell { padding: 18px 0 !important; border-right: none !important; }
+  .clue-row { grid-template-columns: 30px 1fr; }
+  .clue-row .c-name { grid-column: 2; }
+  .clue-row .c-desc { grid-column: 2; }
+  .timeline { grid-template-columns: 50px 1fr 130px; }
+  .sources-list { grid-template-columns: 1fr; }
+  .sources { padding: 28px 20px; }
+  .colophon { padding: 20px; flex-direction: column; gap: 8px; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="wordmark">SNAP<span class="slash">/</span>SCOUT</div>
+    <div class="meta">REPORT <strong>№001</strong> · 2026.05.26 · 채빈</div>
+  </header>
+
+  <!-- SUB-NAV -->
+  <div class="subnav">
+    <div class="subnav-l">LOCATION INTELLIGENCE REPORT</div>
+    <div class="subnav-r">Hong Kong · Sheung Wan · POHO</div>
+  </div>
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-tag">
+      <span>FILE · TPS-KYT-001</span>
+      <span>CONFIDENCE 96 / 100</span>
+    </div>
+    <h1>觀音堂</h1>
+    <div class="h1-en">Tai Ping Shan Kwun Yam Tong &mdash; the birthplace of Hong Kong's 借庫 tradition.</div>
+
+    <div class="cover-grid">
+      <div class="cover-photo">
+        <img src="reference.jpg" alt="Reference photograph submitted by 채빈" />
+        <div class="ph-meta">
+          <span>REFERENCE · INPUT</span>
+          <span>625F79740DBCB8D2</span>
+        </div>
+      </div>
+      <div class="cover-summary">
+        <dl>
+          <dt>Name</dt>
+          <dd>太平山街 觀音堂<span class="sub">Tai Ping Shan Kwun Yam Tong</span></dd>
+          <dt>Address</dt>
+          <dd>香港島 上環 太平山街 34號<span class="sub">34 Tai Ping Shan St, Sheung Wan, HK</span></dd>
+          <dt>Coord</dt>
+          <dd class="mono">22.2841°N, 114.1499°E</dd>
+          <dt>Pin</dt>
+          <dd><a href="https://maps.google.com/?q=22.2841,114.1499" target="_blank">maps.google.com/?q=22.2841,114.1499</a></dd>
+          <dt>MTR</dt>
+          <dd>Sheung Wan A2 → 도보 10분<span class="sub">가파른 오르막, 신부 신발 주의</span></dd>
+          <dt>Built</dt>
+          <dd class="mono">1840<sup class="fn"><a href="#s1">[1]</a></sup><span class="sub">道光 20年 · 홍콩섬 최초 觀音廟</span></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- VERDICT -->
+  <div class="verdict">
+    <div class="v-block good">
+      VERDICT
+      <strong>GO-WORTHY</strong>
+    </div>
+    <div class="v-block score">
+      LOCATION CONFIDENCE
+      <strong>96 / 100</strong>
+    </div>
+    <div class="v-summary">글씨 단서 (觀音堂·借庫 대련), 비주얼 시그니처 (계단·외벽·간판), 역사 맥락 모두 일치. 채빈이 답사 가지 않고도 80% 결정 가능.</div>
+    <div class="v-block">
+      RECOMMENDED
+      <strong>07:30–09:00</strong>
+    </div>
+  </div>
+
+  <!-- 01 IDENTIFICATION -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">01</div>
+      <div class="sec-title">
+        <h2>위치 추정 근거</h2>
+        <div class="en">Identification · Visual + textual evidence</div>
+      </div>
+      <div class="sec-aside">6 distinct clues<br>cross-validated</div>
+    </div>
+
+    <p style="font-size: 15.5px; line-height: 1.7; max-width: 760px; margin-bottom: 16px;">홍콩에서 가장 오래된 관음 사원<sup class="fn"><a href="#s1">[1]</a></sup>이자, 「觀音借庫」 의식의 발상지<sup class="fn"><a href="#s2">[2]</a></sup>. 사진 속 계단은 觀音堂 정면을 향해 오르는 太平山街 중단부의 가파른 계단 구간으로, 觀音堂(34號)이 계단 위쪽 좌측 코너에 자리잡고 있고, 노란 借庫 대련(對聯)이 그 옆 점포 정면에 걸려 있음.</p>
+
+    <div class="id-clues">
+      <div class="id-clues-h">EVIDENCE LEDGER</div>
+      <div class="clue-row">
+        <div class="c-num">01</div>
+        <div class="c-name">「觀音堂」 간판</div>
+        <div class="c-desc">흰 바탕 검은 글씨, 가로형. 太平山街 觀音堂 특유의 폰트와 일치. 紅磡 觀音廟와 명확히 다른 디자인.</div>
+      </div>
+      <div class="clue-row">
+        <div class="c-num">02</div>
+        <div class="c-name">노란 借庫 對聯</div>
+        <div class="c-desc">「重見洛陽橋下水」「借庫開源」「大開香海庫中金」 — 借庫 의식 발상지인 본 사원에서만 보이는 고유 조합<sup class="fn"><a href="#s2">[2]</a></sup>.</div>
+      </div>
+      <div class="clue-row">
+        <div class="c-num">03</div>
+        <div class="c-name">계단 구조</div>
+        <div class="c-desc">폭 좁고 가파른 돌계단 + 중앙 금속 난간. POHO 지구 특유의 ladder street 시그니처<sup class="fn"><a href="#s3">[3]</a></sup>.</div>
+      </div>
+      <div class="clue-row">
+        <div class="c-num">04</div>
+        <div class="c-name">건축 디테일</div>
+        <div class="c-desc">우측 적색 패턴 외벽, 노란 단층 점포는 上環 太平山街 정확한 위치 확정 근거. Google Street View 일치.</div>
+      </div>
+      <div class="clue-row">
+        <div class="c-num">05</div>
+        <div class="c-name">식생·기후</div>
+        <div class="c-desc">좌측 아열대 활엽수, 습한 외벽 — 홍콩 5–9월 우기 직전 시즌 가능성. 조명 부드러움도 일치.</div>
+      </div>
+      <div class="clue-row">
+        <div class="c-num">06</div>
+        <div class="c-name">도시 시그니처</div>
+        <div class="c-desc">우측 No Entry 표지판 폰트 + 우측통행 도로 마킹 = 홍콩 (대만·일본·중국 본토 패턴과 구분됨).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 SHOOTING CONDITIONS -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">02</div>
+      <div class="sec-title">
+        <h2>촬영 조건</h2>
+        <div class="en">Shooting conditions · Cost · Permits · Light · Crowd</div>
+      </div>
+      <div class="sec-aside">free entry<br>tripod cautioned</div>
+    </div>
+
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>ITEM</th>
+          <th>STATUS</th>
+          <th>NOTE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-name">입장료</td>
+          <td class="col-status"><span class="badge b-ok">FREE</span></td>
+          <td class="col-desc">사원·계단 모두 무료. 별도 예약 불필요.</td>
+        </tr>
+        <tr>
+          <td class="col-name">촬영 허가</td>
+          <td class="col-status"><span class="badge b-warn">CAUTION</span></td>
+          <td class="col-desc">공공 도로는 별도 허가 X. <strong>삼각대 사용 시</strong> 상업촬영으로 간주되어 보안요원·경찰 단속 가능<sup class="fn"><a href="#s4">[4]</a></sup>. 권장: 핸드헬드 또는 모노포드.</td>
+        </tr>
+        <tr>
+          <td class="col-name">사원 운영시간</td>
+          <td class="col-status"><span class="badge b-unk">UNVERIFIED</span></td>
+          <td class="col-desc">일반 도교 사원 통례 <strong>07:00–18:00</strong> (추정). 본 리포트에서 미확정 — 현지 또는 LCSD 확인 필요.</td>
+        </tr>
+        <tr>
+          <td class="col-name">반입 제약</td>
+          <td class="col-status"><span class="badge b-ok">OPEN</span></td>
+          <td class="col-desc">공공 계단 = 반사판·소품 OK. 단 보행 방해 시 즉시 단속. 사원 내부는 향·연기 많아 렌즈 보호 권장.</td>
+        </tr>
+        <tr>
+          <td class="col-name">드론</td>
+          <td class="col-status"><span class="badge b-bad">BANNED</span></td>
+          <td class="col-desc">上環 = 주거밀집 + 사원 보호 구역. CAD(민항처) 허가 없이 비행 불가<sup class="fn"><a href="#s5">[5]</a></sup>.</td>
+        </tr>
+        <tr>
+          <td class="col-name">동행 인원</td>
+          <td class="col-status"><span class="badge b-warn">LIMIT</span></td>
+          <td class="col-desc">계단 폭 좁음. 어시 1명 + 신랑신부까지 권장. 5명 이상은 통행 방해.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- LIGHT CHART -->
+    <div class="light-grid">
+      <h4>LIGHT BY HOUR · 5월 / 위도 22.28°N / 계단 방향 NNW</h4>
+      <div class="timeline">
+        <div class="t-time">06:00</div><div class="t-bar" data-w="10"></div><div class="t-label">일출 전, 사원 그림자</div>
+        <div class="t-time">07–09</div><div class="t-bar" data-w="75"></div><div class="t-label good">✦ 부드러운 측광 · 최적</div>
+        <div class="t-time">10–11</div><div class="t-bar" data-w="55"></div><div class="t-label">좌측 그늘, 우측 강한 햇빛</div>
+        <div class="t-time">12–14</div><div class="t-bar harsh" data-w="100"></div><div class="t-label bad">⚠ 직사광 · 회피</div>
+        <div class="t-time">15–17</div><div class="t-bar" data-w="55"></div><div class="t-label">우측 건물 그림자 길어짐</div>
+        <div class="t-time">17–19</div><div class="t-bar golden" data-w="100"></div><div class="t-label good">✦ 골든아워 · 최적</div>
+        <div class="t-time">19+</div><div class="t-bar" data-w="35"></div><div class="t-label">간판 조명, 야경 가능</div>
+      </div>
+    </div>
+
+    <!-- CROWD -->
+    <div class="crowd">
+      <h4>CROWD BY DAY · Google popular times 추정</h4>
+      <div class="crowd-bars">
+        <div class="crowd-day"><div class="d-l">MON</div><div class="d-b"><div class="d-f" style="height:25%;"></div></div><div class="d-v">25</div></div>
+        <div class="crowd-day"><div class="d-l">TUE</div><div class="d-b"><div class="d-f" style="height:25%;"></div></div><div class="d-v">25</div></div>
+        <div class="crowd-day"><div class="d-l">WED</div><div class="d-b"><div class="d-f" style="height:30%;"></div></div><div class="d-v">30</div></div>
+        <div class="crowd-day"><div class="d-l">THU</div><div class="d-b"><div class="d-f" style="height:35%;"></div></div><div class="d-v">35</div></div>
+        <div class="crowd-day"><div class="d-l">FRI</div><div class="d-b"><div class="d-f" style="height:50%;"></div></div><div class="d-v">50</div></div>
+        <div class="crowd-day"><div class="d-l">SAT</div><div class="d-b"><div class="d-f" style="height:80%;"></div></div><div class="d-v">80</div></div>
+        <div class="crowd-day"><div class="d-l">SUN</div><div class="d-b"><div class="d-f" style="height:85%;"></div></div><div class="d-v">85</div></div>
+      </div>
+      <div class="crowd-warn">
+        <strong>⚠ 2026.03.13–14 觀音借庫 본행사 절대 회피.</strong> 사원 야간 개방 + 수만 명 신도 운집<sup class="fn"><a href="#s6">[6]</a></sup>. 촬영 자체 불가 수준.
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 CURRENT STATE -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">03</div>
+      <div class="sec-title">
+        <h2>현재 상태 점검</h2>
+        <div class="en">Current state · Photo vs reality diff</div>
+      </div>
+      <div class="sec-aside">all signatures<br>still present</div>
+    </div>
+
+    <div class="state-grid">
+      <div class="state-card">
+        <div class="s-h">01 / TEMPLE</div>
+        <h4>觀音堂 본체</h4>
+        <p>1840년 창건 이후 안정 운영. 90년대 초 太平山街 도로 정비로 정문이 약간 후퇴. 사진 속 구조는 그 이후 모습 그대로.</p>
+      </div>
+      <div class="state-card">
+        <div class="s-h">02 / SIGN</div>
+        <h4>노란 借庫 對聯</h4>
+        <p>觀音堂 측 영구 설치물. 매년 借庫 시즌에 새로 도색되지만 위치·문구·색감 동일. 사진과 일치.</p>
+      </div>
+      <div class="state-card">
+        <div class="s-h">03 / STAIRS</div>
+        <h4>계단·난간</h4>
+        <p>太平山街 자체가 보호 거리 지정. 계단 구조·중앙 난간 모두 보존 대상. 변화 없음.</p>
+      </div>
+      <div class="state-card warn">
+        <div class="s-h">04 / SHOPS</div>
+        <h4>주변 점포</h4>
+        <p>좌측 빨간 차양·노란 단층 점포는 임대 점포라 1–2년 주기로 업종 변동 가능. 색감 다를 수 있음 — 현지 확인 권장.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 ALTERNATIVES -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">04</div>
+      <div class="sec-title">
+        <h2>대체·인접 공간</h2>
+        <div class="en">Alternatives within walking distance</div>
+      </div>
+      <div class="sec-aside">5 spots<br>under 400m</div>
+    </div>
+
+    <table class="alt-tbl">
+      <thead>
+        <tr>
+          <th style="width:60px;">№</th>
+          <th>LOCATION</th>
+          <th class="t-r" style="width:120px;">DISTANCE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="a-num">01</div></td>
+          <td>
+            <div class="a-name">磅巷 (Pound Lane)</div>
+            <div class="a-en">238 계단 · 觀音堂 옆 골목<sup class="fn"><a href="#s3">[3]</a></sup></div>
+            <div class="a-desc">觀音堂에서 도보 2분. 觀音堂보다 한적하고 계단이 더 김. 양옆 빌딩 그림자가 계단에 깊은 선을 만듦. 인물 단독 컷에 적합.</div>
+          </td>
+          <td class="t-r"><span class="a-dist">120 m</span><span class="a-dir">SE</span></td>
+        </tr>
+        <tr>
+          <td><div class="a-num">02</div></td>
+          <td>
+            <div class="a-name">樓梯街 (Ladder Street)</div>
+            <div class="a-en">홍콩 가장 유명 계단 · 文武廟 옆</div>
+            <div class="a-desc">觀音堂보다 폭 넓고 더 화려. 단점: 관광객·다른 작가와 충돌 확률 높음. 평일 오전 추천.</div>
+          </td>
+          <td class="t-r"><span class="a-dist">350 m</span><span class="a-dir">E</span></td>
+        </tr>
+        <tr>
+          <td><div class="a-num">03</div></td>
+          <td>
+            <div class="a-name">Tank Lane (水池巷)</div>
+            <div class="a-en">컬러풀 벽화 골목</div>
+            <div class="a-desc">계단은 아니지만 좁은 골목 + 컬러 벽화. 觀音堂의 무드와 대비되는 캐주얼/스트릿 컷. 같은 출사에 톤 변화 주기 좋음.</div>
+          </td>
+          <td class="t-r"><span class="a-dist">200 m</span><span class="a-dir">NE</span></td>
+        </tr>
+        <tr>
+          <td><div class="a-num">04</div></td>
+          <td>
+            <div class="a-name">Tai On Terrace (大安台)</div>
+            <div class="a-en">磅巷 위쪽 카페 골목</div>
+            <div class="a-desc">磅巷을 따라 올라간 정상의 작은 테라스. 카페·갤러리 + 트램 노출. 야외 + 실내 카페 컷 둘 다 가능.</div>
+          </td>
+          <td class="t-r"><span class="a-dist">300 m</span><span class="a-dir">SE</span></td>
+        </tr>
+        <tr>
+          <td><div class="a-num">05</div></td>
+          <td>
+            <div class="a-name">Po Hing Fong (普慶坊)</div>
+            <div class="a-en">POHO 지구 메인 거리</div>
+            <div class="a-desc">觀音堂 한 블록 아래. 카페·부티크 밀집. 인물의 평지 컷 + 모던 무드. 계단 출사 후 자연스러운 동선.</div>
+          </td>
+          <td class="t-r"><span class="a-dist">150 m</span><span class="a-dir">N</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 05 OVERSEAS MODE -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">05</div>
+      <div class="sec-title">
+        <h2>해외 출사 모드</h2>
+        <div class="en">Overseas mode · 한국 → 홍콩</div>
+      </div>
+      <div class="sec-aside">no visa<br>no permit needed</div>
+    </div>
+
+    <div class="over-grid">
+      <div class="over-cell">
+        <div class="o-h">VISA</div>
+        <p>한국 여권 <strong>무비자 90일</strong>. 출입국 시 호텔 주소 신고만.</p>
+      </div>
+      <div class="over-cell">
+        <div class="o-h">FILMING PERMIT</div>
+        <p>공공 도로·사원 무허가. <strong>LCSD 관할 공원</strong>은 사전 신청. POHO 지구는 해당 X<sup class="fn"><a href="#s4">[4]</a></sup>.</p>
+      </div>
+      <div class="over-cell">
+        <div class="o-h">BEST SEASON</div>
+        <p><strong>11–3월 청명·건조</strong>. 5–9월 우기·습도 90%. 카메라 결로 주의.</p>
+      </div>
+      <div class="over-cell">
+        <div class="o-h">LOCAL FIXER</div>
+        <p>POHO는 MTR + 도보 접근. 코디네이터 불필요. 영어 충분.</p>
+      </div>
+      <div class="over-cell">
+        <div class="o-h">EQUIPMENT</div>
+        <p>전압 <strong>220V · 영국식 BF</strong> 콘센트(어댑터 필수). 4G 로밍 또는 현지 SIM.</p>
+      </div>
+      <div class="over-cell">
+        <div class="o-h">WARDROBE</div>
+        <p>5월 평균 26℃ · 습도 80%. 흰 드레스가 계단 톤과 대비 좋음.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 CAUTION -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">06</div>
+      <div class="sec-title">
+        <h2>주의사항</h2>
+        <div class="en">Photographer's caution</div>
+      </div>
+      <div class="sec-aside">read before<br>departure</div>
+    </div>
+
+    <ul class="caution-list">
+      <li><div class="c-i">01</div><div><strong>觀音堂은 종교 시설.</strong> 신도 활동 시간(특히 음력 1·15일, 借庫 시즌)에 사원 정면 촬영은 분쟁 소지. 신도들이 들어오면 즉시 비켜주기.</div></li>
+      <li><div class="c-i">02</div><div><strong>계단은 실제 주민 통행로.</strong> POHO 지구는 거주 구역. 계단 점거 + 보행 차단은 주민 민원 즉각. 컷 사이 동선 비워주기.</div></li>
+      <li><div class="c-i">03</div><div><strong>삼각대 = 위험 신호.</strong> 홍콩 보안요원·교통경찰은 삼각대 보면 상업촬영 의심<sup class="fn"><a href="#s4">[4]</a></sup>. 핸드헬드 + 모노포드까지만.</div></li>
+      <li><div class="c-i">04</div><div><strong>2026.03.13–14 절대 회피.</strong> 觀音借庫 본행사. 신도 수만 명, 야간 운영<sup class="fn"><a href="#s6">[6]</a></sup>. 촬영 자체 불가.</div></li>
+      <li><div class="c-i">05</div><div><strong>가파른 경사 — 신부 신발 주의.</strong> 계단 폭이 좁고 표면이 닳아 미끄러움. 굽 있는 슈즈는 환복 후 진입 추천. 본식 드레스라면 보조 어시 1명 필수.</div></li>
+      <li><div class="c-i">06</div><div><strong>드론 금지.</strong> 上環 일대는 주거밀집 + 사원 보호. 민항처(CAD) 허가 없이 비행 불가.</div></li>
+    </ul>
+  </section>
+
+  <!-- 07 GALLERY -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">07</div>
+      <div class="sec-title">
+        <h2>같은 공간, 다른 시선</h2>
+        <div class="en">Reference gallery · How others have framed this place</div>
+      </div>
+      <div class="sec-aside">10 frames<br>Pinterest visual match</div>
+    </div>
+
+    <div class="gallery-grid">
+      <a class="gallery-cell" href="https://www.pinterest.com/pin/558657528800127859/" target="_blank"><span class="g-num">01</span><img src="gallery/r01.jpg" alt="가파른 계단 + 빨간 난간 — 채빈 사진과 시각적 최고 매칭" loading="lazy"></a>
+      <a class="gallery-cell" href="https://www.pinterest.com/pin/469992911135537778/" target="_blank"><span class="g-num">02</span><img src="gallery/r09.jpg" alt="Hong Kong Pre-Wedding Vibes — 네온 야경" loading="lazy"></a>
+      <a class="gallery-cell" href="https://www.pinterest.com/pin/670684569545768775/" target="_blank"><span class="g-num">03</span><img src="gallery/r07.jpg" alt="홍콩 금붕어 어시장 + 신부" loading="lazy"></a>
+      <a class="gallery-cell" href="https://www.pinterest.com/pin/680536193734400428/" target="_blank"><span class="g-num">04</span><img src="gallery/r04.jpg" alt="室冰友朋 한자 간판 + 빈티지 동적 컷" loading="lazy"></a>
+      <a class="gallery-cell" href="https://www.pinterest.com/pin/827255025345033155/" target="_blank"><span class="g-num">05</span><img src="gallery/r03.jpg" alt="빈티지 식당 + Tsingtao 맥주" loading="lazy"></a>
+      <a class="gallery-cell" href="https://www.pinterest.com/pin/329607266495704032/" target="_blank"><span class="g-num">06</span><img src="gallery/r11.jpg" alt="홍콩 대낮 횡단보도 + 大樓 건물" loading="lazy"></a>
+      <a class="gallery-cell" href="https://www.pinterest.com/pin/111745634499674744/" target="_blank"><span class="g-num">07</span><img src="gallery/r14.jpg" alt="빈티지 시장 + 신랑신부 (A39)" loading="lazy"></a>
+      <a class="gallery-cell" href="https://www.pinterest.com/pin/649996158733548485/" target="_blank"><span class="g-num">08</span><img src="gallery/r17.jpg" alt="Hanoi, Vietnam — 골목 + 코카콜라" loading="lazy"></a>
+      <a class="gallery-cell" href="https://www.pinterest.com/pin/1040120476453036267/" target="_blank"><span class="g-num">09</span><img src="gallery/r12.jpg" alt="베트남 노점 + 빈티지 신랑신부" loading="lazy"></a>
+      <a class="gallery-cell" href="https://www.pinterest.com/pin/591308626079030226/" target="_blank"><span class="g-num">10</span><img src="gallery/r19.jpg" alt="도쿄 네온 야경 거리 + 신랑신부" loading="lazy"></a>
+    </div>
+    <div class="gallery-caption">
+      ※ 10 frames from <strong>Pinterest related pins</strong> — 채빈 사진(pin <span class="mono">2040762327734446</span>)의 알고리즘 추천 79건 중 시각적 최고 매칭 10건 선별<sup class="fn"><a href="#s7">[7]</a></sup>. 클릭 시 핀터레스트 원본 페이지로. 호버 시 컬러로 전환.
+    </div>
+  </section>
+
+  <!-- SOURCES -->
+  <div class="sources">
+    <div class="sources-h">SOURCES</div>
+    <div class="sources-sub">REFERENCES &amp; FURTHER READING</div>
+    <ul class="sources-list">
+      <li id="s1"><span class="s-n">[1]</span><div>觀音堂 1840년 창건 — <a href="https://en.wikipedia.org/wiki/Tai_Ping_Shan_Street" target="_blank">Tai Ping Shan Street, Wikipedia</a><span class="s-host">en.wikipedia.org</span></div></li>
+      <li id="s2"><span class="s-n">[2]</span><div>觀音借庫 발상지 — <a href="https://www.timeout.com.hk/hong-kong/hk/%E5%A5%BD%E5%8E%BB%E8%99%95/%E8%A7%80%E9%9F%B3%E5%A0%82" target="_blank">觀音堂 · Time Out HK</a><span class="s-host">timeout.com.hk</span></div></li>
+      <li id="s3"><span class="s-n">[3]</span><div>磅巷 238 계단 + Ladder Street 문화 — <a href="https://zolimacitymag.com/stair-culture-digging-into-the-past-and-present-of-hong-kongs-ladder-streets/" target="_blank">Stair Culture · Zolima City Mag</a><span class="s-host">zolimacitymag.com</span></div></li>
+      <li id="s4"><span class="s-n">[4]</span><div>홍콩 공공장소 촬영·삼각대 규정 — <a href="https://geoexpat.com/forum/26/thread220525.html" target="_blank">Permits for photography in public locations · GeoExpat</a><span class="s-host">geoexpat.com</span></div></li>
+      <li id="s5"><span class="s-n">[5]</span><div>홍콩 드론 규정 (CAD) — <a href="https://www.tunguyenwedding.com/Wedding-Guide/Hong-Kong-Wedding-Photographer-Planning-Guide" target="_blank">Hong Kong Wedding Planning Guide</a><span class="s-host">tunguyenwedding.com</span></div></li>
+      <li id="s6"><span class="s-n">[6]</span><div>觀音借庫 2026 일정 (3.13–14) — <a href="https://hk.news.yahoo.com/%E8%A7%80%E9%9F%B3%E5%80%9F%E5%BA%AB-2026-%E9%A6%99%E6%B8%AF-%E5%AF%BA%E5%BB%9F-%E9%96%8B%E6%94%BE%E6%99%82%E9%96%93-%E7%B6%B2%E4%B8%8A%E4%BB%A3%E8%BE%A6-050530704.html" target="_blank">觀音借庫 2026 香港寺廟 開放時間 · Yahoo HK</a><span class="s-host">hk.news.yahoo.com</span></div></li>
+      <li id="s7"><span class="s-n">[7]</span><div>갤러리 10장 — Pinterest 채빈 사진(pin <span class="mono">2040762327734446</span>)의 related pins 알고리즘 추천 79건 중 선별 — <a href="https://www.pinterest.com/pin/2040762327734446/" target="_blank">원본 핀 페이지</a><span class="s-host">pinterest.com</span></div></li>
+      <li id="s8"><span class="s-n">[8]</span><div>관련 핀터레스트 보드 — <a href="https://www.pinterest.com/melvinang5/hong-kong-pre-wedding-shoot-ideas/" target="_blank">Hong Kong Pre-Wedding Shoot Ideas</a><span class="s-host">pinterest.com</span></div></li>
+      <li id="s9"><span class="s-n">[9]</span><div>홍콩 웨딩 출사지 가이드 (37곳) — <a href="https://hfmaphotography.com/%E9%A6%99%E6%B8%AF%E5%A9%9A%E6%94%9D%E7%86%B1%E9%96%80%E6%99%AF%E9%BB%9E%E5%9C%B0%E9%BB%9E%E6%8E%A8%E4%BB%8B-hong-kong-pre-wedding-location/" target="_blank">HF Photography · 香港婚攝熱門景點</a><span class="s-host">hfmaphotography.com</span></div></li>
+      <li id="s10"><span class="s-n">[10]</span><div>POHO·上環 출사 종합 가이드 — <a href="https://brideandbreakfast.hk/pre-wedding-photo-session-spots-within-the-city/" target="_blank">Pre-wedding Photo Session Spots · Bride and Breakfast HK</a><span class="s-host">brideandbreakfast.hk</span></div></li>
+      <li><span class="s-n">[11]</span><div>太平山街 공식 가이드 — <a href="https://www.discoverhongkong.com/eng/place-to-go/tai-ping-shan-street.html" target="_blank">Tai Ping Shan Street · HK Tourism Board</a><span class="s-host">discoverhongkong.com</span></div></li>
+      <li><span class="s-n">[12]</span><div>觀音堂 위치·역사 — <a href="https://m2gether.com/temple/13/" target="_blank">上環觀音堂 · 从二</a><span class="s-host">m2gether.com</span></div></li>
+    </ul>
+  </div>
+
+  <!-- COLOPHON -->
+  <footer class="colophon">
+    <div><strong>SNAP/SCOUT</strong> &middot; v0.1 prototype &middot; report №001</div>
+    <div class="sig">generated 2026.05.26 &middot; for 채빈</div>
+  </footer>
+
+</div>
+</body>
+</html>
